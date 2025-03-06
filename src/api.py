@@ -268,7 +268,7 @@ def insert_data():
          employeeHistorical = pd.read_sql('employee', engine)
 
          #Check if both dataframes have the same schema (Columns and datatypes)
-         if employeeNew.dtypes[0:3].equals(employeeHistorical.dtypes[0:3]) & ((employeeHistorical.dtypes.department_id in ('float', 'int')) | (employeeHistorical.dtypes.job_id in ('float', 'int'))):
+         if employeeNew.dtypes[0:3].equals(employeeHistorical.dtypes[0:3]) & ((employeeHistorical.dtypes.department_id in ('float', 'int')) & (employeeHistorical.dtypes.job_id in ('float', 'int'))):
 
             #Get valid IDs for job_id and department_id from their respective tables
             job_valid_ids = tuple(pd.read_sql('job', engine)['job_id'])
