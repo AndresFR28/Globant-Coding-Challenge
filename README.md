@@ -32,7 +32,7 @@ a local REST API that must:
 ## Installation
 Clone the repository
 ```sh
-git clone 
+git clone https://github.com/AndresFR28/Globant-Coding-Challenge.git
 ```
 
 Install requirements
