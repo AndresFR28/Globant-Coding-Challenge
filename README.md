@@ -40,9 +40,14 @@ Go to the repositories directory
 cd Globant-Coding-Challenge
 ```
 
-Build and start the containers
+Build and start the containers (Run api.py)
 ```sh
 docker-compose up --build
+```
+
+ON ANOTHER TERMINAL- Run tests (test_api.py)
+```sh
+docker-compose exec flask_api pytest
 ```
 
 Stop and remove the containers

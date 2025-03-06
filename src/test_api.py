@@ -1,6 +1,5 @@
 from api import api, db, DepartmentSchema, JobSchema, EmployeeSchema
 import pytest
-from io import StringIO
 from unittest.mock import patch
 import pandas as pd
 
