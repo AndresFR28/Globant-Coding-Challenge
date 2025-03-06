@@ -1,6 +1,3 @@
-#pip install flask flask-restful flask-sqlalchemy psycopg2 pandas pytest pytest-flask
-#setx pguser = "postgres"
-
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import create_engine
@@ -11,7 +8,6 @@ import psycopg2
 from psycopg2 import sql
 import os
 from dotenv import load_dotenv # type: ignore
-import glob
 
 load_dotenv()
 api = Flask(__name__)
@@ -272,7 +268,7 @@ def insert_data():
          employeeHistorical = pd.read_sql('employee', engine)
 
          #Check if both dataframes have the same schema (Columns and datatypes)
-         if employeeNew.dtypes.equals(employeeHistorical.dtypes):
+         if employeeNew.dtypes[0:3].equals(employeeHistorical.dtypes[0:3]) & ((employeeHistorical.dtypes.department_id in ('float', 'int')) | (employeeHistorical.dtypes.job_id in ('float', 'int'))):
 
             #Get valid IDs for job_id and department_id from their respective tables
             job_valid_ids = tuple(pd.read_sql('job', engine)['job_id'])

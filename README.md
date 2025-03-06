@@ -30,6 +30,8 @@ a local REST API that must:
 - Unit Test Mock - Allows to create mock functionalities to replicate the operation of the API and run tests
 
 ## Installation
+- Se debe tener installado Docker para poder ejecutar la API.
+
 Clone the repository
 ```sh
 git clone https://github.com/AndresFR28/Globant-Coding-Challenge.git
