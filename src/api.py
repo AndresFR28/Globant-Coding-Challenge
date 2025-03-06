@@ -8,10 +8,12 @@ import psycopg2
 from psycopg2 import sql
 import os
 from dotenv import load_dotenv # type: ignore
+import warnings
+
 
 load_dotenv()
 api = Flask(__name__)
-
+warnings.filterwarnings("ignore", category=FutureWarning)
 host, pgdatabase, port, pguser, password = os.getenv("POSTGRES_HOST"), os.getenv("POSTGRES_DB"), os.getenv("POSTGRES_PORT"), os.getenv("POSTGRES_USER"), os.getenv("POSTGRES_PASSWORD")
 db_URI = f'postgresql://{pguser}:{password}@{host}/{pgdatabase}'
 api.config["SQLALCHEMY_DATABASE_URI"] = db_URI
@@ -266,6 +268,14 @@ def insert_data():
          #Retrieve both historical file and the new file for employees
          employeeNew = pd.read_csv(empPath, names=["employee_id", "name", "datetime", "department_id", "job_id"], dtype={'department_id': float, 'job_id': float})
          employeeHistorical = pd.read_sql('employee', engine)
+
+         #Replace every NaN with None so PostgreSQL can accept the data
+         employeeNew.loc[employeeNew['department_id'].isna(), 'department_id'] = ""
+         employeeNew['department_id'] = employeeNew['department_id'].replace('', None)
+
+         #Replace every NaN with None so PostgreSQL can accept the data
+         employeeNew.loc[employeeNew['job_id'].isna(), 'job_id'] = ""
+         employeeNew['job_id'] = employeeNew['job_id'].replace('', None)
 
          #Check if both dataframes have the same schema (Columns and datatypes)
          if employeeNew.dtypes[0:3].equals(employeeHistorical.dtypes[0:3]) & ((employeeHistorical.dtypes.department_id in ('float', 'int')) & (employeeHistorical.dtypes.job_id in ('float', 'int'))):
