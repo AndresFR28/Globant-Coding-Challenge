@@ -1,5 +1,5 @@
 # Globant-Coding-Challenge
- This is the repository for the Globant Data Engineer Coding Challenge.
+ This is the repository for the Globant Data Engineer Coding Challenge. The API is based on Flask, SQLAlchemy and a PostgreSQL connection to handle the data and respective queries. The app is containerized with Docker to allow for easy deployment regardless of the system.
 
 ## Description
 - Section 1: API
@@ -35,7 +35,7 @@ Clone the repository
 git clone https://github.com/AndresFR28/Globant-Coding-Challenge.git
 ```
 
-Install requirements
+Go to the repositories directory
 ```sh
 cd Globant-Coding-Challenge
 ```
